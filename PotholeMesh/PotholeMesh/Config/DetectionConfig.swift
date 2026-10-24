@@ -44,6 +44,9 @@ nonisolated struct DetectionConfig: Equatable, Sendable {
     var captureSeconds: Double = 0.25
     /// Duration is measured while m exceeds μ + durationSigmaMultiplier·σ.
     var durationSigmaMultiplier: Double = 2
+    /// Minimum span of baseline history before the gate can trip, so the first samples of
+    /// a session (empty window, μ = σ = 0) can't produce a false impact (s).
+    var minBaselineSeconds: Double = 1.0
 
     // MARK: Impact score (n(x, lo, hi) bounds and weights)
 

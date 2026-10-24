@@ -78,14 +78,14 @@ Common verification commands:
     - Replace the Drive placeholder in `ContentView`; inject `EvidenceUploader` from `PotholeMeshApp`; verify with `xcodebuild … build`
     - _Requirements: 9.4–9.7, 14.1–14.6, 15.1, 15.2, 16.1–16.6, 18.1–18.6, 19.3, 19.5, 19.6_
 
-- [ ] 7. On-device impact and clean-crossing detection with XCTests
-  - [ ] 7.1 Implement `ImpactDetector` and `CleanCrossingTracker` and wire them into `DriveSession`
+- [x] 7. On-device impact and clean-crossing detection with XCTests
+  - [x] 7.1 Implement `ImpactDetector` and `CleanCrossingTracker` and wire them into `DriveSession`
     - `Drive/ImpactDetector.swift`: pure value type `process(sample, context) -> ImpactEvent?`; computes m, r, jerk; rolling 2 s μ/σ with `sigmaFloorG`; candidate gate (fresh accurate fix, known speed ≥ 4 m/s, z ≥ 4, m ≥ 0.35 g, jerk ≥ 8 g/s, r ≤ 3 rad/s, cooldown 2 s) using the pre-event baseline; 0.25 s capture of peaks and duration above μ + 2σ; transparent integer score in [0, 100]; time injected, no system clock
     - `Drive/CleanCrossingTracker.swift`: pure value type with one Encounter per active defect (Armed → InEncounter at ≤ 12 m → Disarmed at > 20 m, emitting only if no impact, exit speed ≥ 4 m/s, and accuracy in (0, 20] m; Disarmed after 30 s without emit; re-Armed beyond 60 m); `noteImpact(at:time:)` sets `impactSeen` only for InEncounter defects within `exitRadiusM` (20 m) of the impact position
     - `DriveSession`: feed samples to the detector; on an event build one IMPACT payload from the gating fix with `is_simulated = false`, hand it to `EvidenceUploader`, increment the count, call `noteImpact(at:time:)`, fire a light haptic and counter animation; feed each accepted fix plus `DefectStore` defects to the tracker and upload one clean_crossing payload per emitted event
     - _Requirements: 14.7, 14.8, 15.3–15.6, 15.11, 17.1–17.7, 17.9_
 
-  - [ ] 7.2 Write `ImpactDetectorTests` and `CleanCrossingTrackerTests` in `PotholeMeshTests`
+  - [x] 7.2 Write `ImpactDetectorTests` and `CleanCrossingTrackerTests` in `PotholeMeshTests`
     - Synthetic samples, fixes, and injected time only; no hardware, permissions, or network
     - Impact detector: flat 0.02 g noise never triggers (seeded deterministic noise); single 1.5 g spike after 2 s baseline at speed ≥ 4 m/s triggers once; spike with low/unknown speed, rotation > 3 rad/s, or inside cooldown does not trigger; score in [0, 100] and non-decreasing with amplitude
     - Clean-crossing tracker: straight pass emits exactly one; pass with impact within 20 m of the defect emits none; impact farther than 20 m does not suppress; lingering/oscillating within 60 m emits at most one; slow or unknown-speed exit emits none; > 30 s encounter emits none; re-arm beyond 60 m

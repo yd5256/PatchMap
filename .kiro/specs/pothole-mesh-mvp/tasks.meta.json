@@ -1,5 +1,10 @@
 {
-  "pbtResults": {},
+  "pbtResults": {
+    "7.2 Write `ImpactDetectorTests` and `CleanCrossingTrackerTests` in `PotholeMeshTests`": {
+      "status": "passed",
+      "lastRunTimestamp": 1792869774030
+    }
+  },
   "executionHistory": {
     "1.1 Implement the `server/` FastAPI + SQLite backend": [
       {
@@ -133,6 +138,37 @@
         "executionId": "6cba9e74-9fab-4cbc-b716-e2717a3e12be",
         "chatSessionId": "sess_2fa09605-c5d6-4998-9bb7-5ade4506daa7",
         "timestamp": 1792868012543
+      }
+    ],
+    "7.1 Implement `ImpactDetector` and `CleanCrossingTracker` and wire them into `DriveSession`": [
+      {
+        "executionId": "86645dc4-0573-4bc0-9b8b-8fe8b14b3aef",
+        "chatSessionId": "sess_47a9cd04-2833-41e0-96f5-990e1c2767b7",
+        "timestamp": 1792868283500
+      },
+      {
+        "executionId": "86645dc4-0573-4bc0-9b8b-8fe8b14b3aef",
+        "chatSessionId": "sess_47a9cd04-2833-41e0-96f5-990e1c2767b7",
+        "timestamp": 1792868509130
+      }
+    ],
+    "7.2 Write `ImpactDetectorTests` and `CleanCrossingTrackerTests` in `PotholeMeshTests`": [
+      {
+        "executionId": "86645dc4-0573-4bc0-9b8b-8fe8b14b3aef",
+        "chatSessionId": "sess_47a9cd04-2833-41e0-96f5-990e1c2767b7",
+        "timestamp": 1792868510590
+      },
+      {
+        "executionId": "86645dc4-0573-4bc0-9b8b-8fe8b14b3aef",
+        "chatSessionId": "sess_47a9cd04-2833-41e0-96f5-990e1c2767b7",
+        "timestamp": 1792869792308
+      }
+    ],
+    "7. On-device impact and clean-crossing detection with XCTests": [
+      {
+        "executionId": "86645dc4-0573-4bc0-9b8b-8fe8b14b3aef",
+        "chatSessionId": "sess_47a9cd04-2833-41e0-96f5-990e1c2767b7",
+        "timestamp": 1792869792335
       }
     ]
   }

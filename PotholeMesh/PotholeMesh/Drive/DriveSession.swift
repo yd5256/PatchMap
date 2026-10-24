@@ -7,8 +7,8 @@
 //  chart series drawn from the 2 s in-memory motion buffer, and gates every piece of
 //  evidence on a fresh, accurate fix and granted location permission.
 //
-//  Task 7.1 plugs `ImpactDetector` into `handle(sample:)` and `CleanCrossingTracker`
-//  into `handle(fix:)`; both hand payloads to `submitEvidence(_:)`.
+//  `ImpactDetector` runs in `handle(sample:)` and `CleanCrossingTracker` in `handle(fix:)`;
+//  both hand payloads to `submitEvidence(_:)`.
 //
 
 import Foundation
@@ -127,7 +127,7 @@ final class DriveSession {
     private(set) var stoppedAt: Date?
     /// Ticks once a second while active so duration and GPS freshness stay current.
     private(set) var now: Date
-    /// Impacts detected in the current session (incremented by task 7.1's detector).
+    /// Impacts detected in the current session by `ImpactDetector`.
     private(set) var impactCount = 0
     /// ~10 Hz magnitude series drawn only from the 2 s in-memory motion buffer.
     private(set) var chartPoints: [AccelerationPoint] = []
@@ -136,12 +136,14 @@ final class DriveSession {
     @ObservationIgnored let location: LocationService
     @ObservationIgnored private let motion: MotionService
     @ObservationIgnored private let uploader: EvidenceUploader
-    /// Active defects for the clean-crossing tracker (task 7.1).
+    /// Active defects for the clean-crossing tracker.
     @ObservationIgnored private let defectStore: DefectStore
     @ObservationIgnored private let deviceId: String
     @ObservationIgnored private let currentDate: () -> Date
     @ObservationIgnored private var tickTask: Task<Void, Never>?
     @ObservationIgnored private var samplesSinceChartUpdate = 0
+    @ObservationIgnored private var detector: ImpactDetector
+    @ObservationIgnored private var tracker: CleanCrossingTracker
 
     init(
         uploader: EvidenceUploader,
@@ -158,6 +160,8 @@ final class DriveSession {
         self.now = currentDate()
         motion = MotionService(config: config)
         location = LocationService(config: config, now: currentDate)
+        detector = ImpactDetector(config: config)
+        tracker = CleanCrossingTracker(config: config)
     }
 
     // MARK: Published status
@@ -218,6 +222,8 @@ final class DriveSession {
     /// Starts sensing. Does nothing when device motion is unavailable (14.5).
     func start() {
         guard !isActive, motion.isAvailable else { return }
+        detector.reset()
+        tracker.reset()
         let started = motion.start { [weak self] sample in
             self?.handle(sample: sample)
         }
@@ -269,10 +275,10 @@ final class DriveSession {
     // MARK: Sensor input
 
     private func handle(sample: MotionSample) {
-        // Task 7.1: feed `sample` (with the latest fix as context) to ImpactDetector here.
-        // On an event: build the IMPACT payload with `deviceId` and the gating fix,
-        // `submitEvidence(_:)`, increment `impactCount`, and call
-        // `CleanCrossingTracker.noteImpact(at:time:)`.
+        let context = ImpactContext(fix: location.latestFix, now: currentDate())
+        if let event = detector.process(sample, context: context) {
+            handle(impact: event)
+        }
         samplesSinceChartUpdate += 1
         if samplesSinceChartUpdate >= config.chartStride {
             samplesSinceChartUpdate = 0
@@ -280,10 +286,47 @@ final class DriveSession {
         }
     }
 
+    /// Requirement 14.7, 14.8: one IMPACT payload from the gating fix, count bump (which
+    /// drives the Drive tab's light haptic and counter animation), and tracker suppression.
+    private func handle(impact event: ImpactEvent) {
+        let fix = event.fix
+        let payload = EvidencePayload.impact(
+            deviceId: deviceId,
+            latitude: fix.latitude,
+            longitude: fix.longitude,
+            timestamp: event.date,
+            speedMps: fix.speedMps,
+            gpsAccuracyM: fix.horizontalAccuracyM,
+            impactScore: Double(event.score),
+            peakAcceleration: event.peakG,
+            peakJerk: event.peakJerkGps,
+            rotationRate: event.peakRotationRadS,
+            isSimulated: false
+        )
+        submitEvidence(payload)
+        impactCount += 1
+        tracker.noteImpact(at: fix, time: event.date)
+        Self.logger.debug("Impact detected, score \(event.score)")
+    }
+
     private func handle(fix: LocationFix) {
         now = currentDate()
-        // Task 7.1: feed `fix` and `defectStore.defects` to CleanCrossingTracker.update
-        // here and `submitEvidence(_:)` one clean_crossing payload per emitted event.
+        let crossings = tracker.update(fix: fix, activeDefects: defectStore.defects, now: now)
+        for crossing in crossings {
+            let exit = crossing.fix
+            let payload = EvidencePayload.cleanCrossing(
+                deviceId: deviceId,
+                roadDefectId: crossing.roadDefectId,
+                latitude: exit.latitude,
+                longitude: exit.longitude,
+                timestamp: exit.timestamp,
+                speedMps: exit.speedMps,
+                gpsAccuracyM: exit.horizontalAccuracyM,
+                isSimulated: false
+            )
+            submitEvidence(payload)
+            Self.logger.debug("Clean crossing for defect \(crossing.roadDefectId)")
+        }
     }
 
     private func updateChart() {
