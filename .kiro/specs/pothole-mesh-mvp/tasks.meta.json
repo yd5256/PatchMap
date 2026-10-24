@@ -1,0 +1,108 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Implement the `server/` FastAPI + SQLite backend": [
+      {
+        "executionId": "890fe94c-48a7-4a09-9ecf-a998067689fb",
+        "chatSessionId": "sess_201aa47f-187d-4052-b4a7-f943b6e9e294",
+        "timestamp": 1792862915811
+      },
+      {
+        "executionId": "890fe94c-48a7-4a09-9ecf-a998067689fb",
+        "chatSessionId": "sess_201aa47f-187d-4052-b4a7-f943b6e9e294",
+        "timestamp": 1792863255302
+      }
+    ],
+    "1.2 Write backend pytest suites (`tests/conftest.py`, `tests/test_fusion.py`, `tests/test_api_lifecycle.py`)": [
+      {
+        "executionId": "890fe94c-48a7-4a09-9ecf-a998067689fb",
+        "chatSessionId": "sess_201aa47f-187d-4052-b4a7-f943b6e9e294",
+        "timestamp": 1792863258172
+      },
+      {
+        "executionId": "890fe94c-48a7-4a09-9ecf-a998067689fb",
+        "chatSessionId": "sess_201aa47f-187d-4052-b4a7-f943b6e9e294",
+        "timestamp": 1792863534831
+      }
+    ],
+    "1. Backend: fusion engine, ingestion, REST API, and pytest suites": [
+      {
+        "executionId": "890fe94c-48a7-4a09-9ecf-a998067689fb",
+        "chatSessionId": "sess_201aa47f-187d-4052-b4a7-f943b6e9e294",
+        "timestamp": 1792863534865
+      }
+    ],
+    "2. Checkpoint - Backend complete": [
+      {
+        "executionId": "8712b830-22a6-418d-9c3f-05630a0fcd83",
+        "chatSessionId": "sess_50d8d487-120f-41c9-af1f-b7cb01d5789d",
+        "timestamp": 1792863868769
+      },
+      {
+        "executionId": "8712b830-22a6-418d-9c3f-05630a0fcd83",
+        "chatSessionId": "sess_50d8d487-120f-41c9-af1f-b7cb01d5789d",
+        "timestamp": 1792863945174
+      }
+    ],
+    "3.1 Configure the existing Xcode project and build the app foundation": [
+      {
+        "executionId": "01926396-e100-478f-aa7c-60002abc564e",
+        "chatSessionId": "sess_e203e0b6-d3eb-4f89-90f6-bb84e7521c56",
+        "timestamp": 1792864132161
+      },
+      {
+        "executionId": "01926396-e100-478f-aa7c-60002abc564e",
+        "chatSessionId": "sess_e203e0b6-d3eb-4f89-90f6-bb84e7521c56",
+        "timestamp": 1792864529031
+      }
+    ],
+    "3.2 Implement the Map tab and defect detail sheet": [
+      {
+        "executionId": "01926396-e100-478f-aa7c-60002abc564e",
+        "chatSessionId": "sess_e203e0b6-d3eb-4f89-90f6-bb84e7521c56",
+        "timestamp": 1792864531897
+      },
+      {
+        "executionId": "01926396-e100-478f-aa7c-60002abc564e",
+        "chatSessionId": "sess_e203e0b6-d3eb-4f89-90f6-bb84e7521c56",
+        "timestamp": 1792864870658
+      }
+    ],
+    "3. iPhone app shell, networking, and live Map tab": [
+      {
+        "executionId": "01926396-e100-478f-aa7c-60002abc564e",
+        "chatSessionId": "sess_e203e0b6-d3eb-4f89-90f6-bb84e7521c56",
+        "timestamp": 1792864870686
+      }
+    ],
+    "4.1 Implement `DemoSimulator`, `DemoEventLog`, and `DemoTabView`": [
+      {
+        "executionId": "2e7cdbee-8352-43f9-a9fd-3703f0ba01e7",
+        "chatSessionId": "sess_f6319f85-4231-4c49-adb3-a7cf7da77bf7",
+        "timestamp": 1792865109039
+      },
+      {
+        "executionId": "2e7cdbee-8352-43f9-a9fd-3703f0ba01e7",
+        "chatSessionId": "sess_f6319f85-4231-4c49-adb3-a7cf7da77bf7",
+        "timestamp": 1792865500949
+      },
+      {
+        "executionId": "4d410200-6dff-416f-9dc0-9e3ef9340be5",
+        "chatSessionId": "sess_f6319f85-4231-4c49-adb3-a7cf7da77bf7",
+        "timestamp": 1792865605430
+      },
+      {
+        "executionId": "4d410200-6dff-416f-9dc0-9e3ef9340be5",
+        "chatSessionId": "sess_f6319f85-4231-4c49-adb3-a7cf7da77bf7",
+        "timestamp": 1792865803268
+      }
+    ],
+    "4. Demo simulator vertical slice (full lifecycle on the Map)": [
+      {
+        "executionId": "2e7cdbee-8352-43f9-a9fd-3703f0ba01e7",
+        "chatSessionId": "sess_f6319f85-4231-4c49-adb3-a7cf7da77bf7",
+        "timestamp": 1792865500980
+      }
+    ]
+  }
+}

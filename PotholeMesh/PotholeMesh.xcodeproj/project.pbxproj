@@ -398,6 +398,9 @@
 				DEVELOPMENT_TEAM = XX6GH8RYF8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PotholeMesh-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Pothole Mesh uses your location only while sensing to tag road impacts and confirm repaired roads. Your route is never uploaded.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Pothole Mesh uses motion sensors while you drive to detect road impacts like potholes. Raw motion data never leaves your phone.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -430,6 +433,9 @@
 				DEVELOPMENT_TEAM = XX6GH8RYF8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PotholeMesh-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Pothole Mesh uses your location only while sensing to tag road impacts and confirm repaired roads. Your route is never uploaded.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "Pothole Mesh uses motion sensors while you drive to detect road impacts like potholes. Raw motion data never leaves your phone.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
