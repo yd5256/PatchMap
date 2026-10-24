@@ -53,6 +53,7 @@ struct MapTabView: View {
                         isSelected: selectedId == item.id
                     )
                     .onTapGesture { select(item) }
+                    .accessibilityAction { select(item) }
                 }
                 .annotationTitles(.hidden)
                 .tag(item.id)

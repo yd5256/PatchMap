@@ -244,7 +244,12 @@ final class DemoSimulator {
             demoDefect = defect
             if defect.state == .resolved { hasSeenResolved = true }
         } catch {
-            Self.logger.debug("GET /defects/\(id) failed: \(String(describing: error), privacy: .public)")
+            // Status card keeps its last value on any failure (Requirement 19.1).
+            if error == .decoding {
+                Self.logger.error("GET /defects/\(id) returned an undecodable body; keeping previous status")
+            } else {
+                Self.logger.debug("GET /defects/\(id) failed: \(String(describing: error), privacy: .public)")
+            }
         }
     }
 

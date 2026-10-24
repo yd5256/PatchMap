@@ -112,6 +112,10 @@ struct DemoTabView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(simulator.isRunning ? .orange : .blue)
                 .disabled(simulator.isResetting)
+                .accessibilityLabel(simulator.isRunning ? "Pause traffic" : "Start traffic")
+                .accessibilityHint(simulator.isRunning
+                                   ? "Stops virtual vehicles"
+                                   : "Sends a virtual vehicle past the demo location every \(Self.seconds(simulator.tripInterval)) seconds")
 
                 HStack(spacing: 12) {
                     Button {
@@ -121,6 +125,8 @@ struct DemoTabView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .tint(DefectState.confirmed.color)
+                    .accessibilityLabel("Inject pothole")
+                    .accessibilityHint("Vehicles start reporting impacts")
 
                     Button {
                         simulator.repairPothole()
@@ -129,6 +135,8 @@ struct DemoTabView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .tint(DefectState.likelyRepaired.color)
+                    .accessibilityLabel("Repair pothole")
+                    .accessibilityHint("Vehicles start reporting clean crossings")
                 }
                 .buttonStyle(.bordered)
                 .font(.subheadline.weight(.semibold))
@@ -172,6 +180,7 @@ struct DemoTabView: View {
                 .buttonStyle(.bordered)
                 .font(.subheadline.weight(.semibold))
                 .disabled(simulator.isResetting)
+                .accessibilityLabel("Reset demo")
                 .accessibilityHint("Pauses traffic and deletes all defects and evidence on the server")
             }
         }
@@ -212,6 +221,8 @@ struct DemoTabView: View {
                         .accessibilityLabel("Server URL")
                     Button("Save", action: saveServerURL)
                         .buttonStyle(.bordered)
+                        .accessibilityLabel("Save server URL")
+                        .accessibilityHint("Uses this server for all requests and checks its health")
                 }
                 if AppConfig.makeURL(from: AppConfig.normalize(serverURLText)) == nil, !serverURLText.isEmpty {
                     Text("Enter a URL like http://<Mac IP>:8000")
@@ -227,9 +238,14 @@ struct DemoTabView: View {
                     Spacer()
                     Button("Check") { Task { await checkHealth() } }
                         .disabled(health == .checking)
+                        .accessibilityLabel("Check server health")
                 }
             }
         }
+    }
+
+    private static func seconds(_ value: Double) -> String {
+        value.formatted(.number.precision(.fractionLength(0...2)))
     }
 
     // MARK: Actions

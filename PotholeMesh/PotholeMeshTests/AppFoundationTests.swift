@@ -247,6 +247,23 @@ final class AppFoundationTests: XCTestCase {
         XCTAssertEqual(store.connectionStatus, .connected)
     }
 
+    func testCancelledPollKeepsConnectionStatus() async {
+        let api = FakeAPIClient()
+        let store = DefectStore(api: api)
+        api.defectsResults = [.success([makeDefect(id: 1)])]
+        await store.refresh()
+        XCTAssertEqual(store.connectionStatus, .connected)
+
+        // Leaving the active phase cancels the in-flight poll; URLSession reports that
+        // as a connectivity error, which must not mark the server unreachable.
+        api.defectsResults = [.failure(.unreachable)]
+        let poll = Task { await store.refresh() }
+        poll.cancel()
+        await poll.value
+        XCTAssertEqual(store.connectionStatus, .connected)
+        XCTAssertEqual(store.defects.map(\.id), [1])
+    }
+
     func testPollingStartsOnceAndStopsIssuingRequests() async throws {
         let api = FakeAPIClient()
         let store = DefectStore(api: api, pollInterval: .milliseconds(20))

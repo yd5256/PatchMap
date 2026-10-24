@@ -93,8 +93,8 @@ Common verification commands:
     - **Property 12: iOS impact detector**, **Property 13: iOS clean-crossing tracker**
     - **Validates: Requirements 15.7–15.10, 17.2–17.6, 17.8, 21.3, 21.6**
 
-- [ ] 8. Integration hardening, polish, and run instructions
-  - [ ] 8.1 Harden error and permission paths, polish UI, and document running the demo
+- [x] 8. Integration hardening, polish, and run instructions
+  - [x] 8.1 Harden error and permission paths, polish UI, and document running the demo
     - Audit for force-unwraps on external data and confirm every network call is `async` throwing only `APIError`; decoding errors are logged and leave published state unchanged
     - Confirm polling stops off-active and resumes on active; Map keeps last markers while unreachable; Drive banners re-evaluate on authorization changes; simulator pause/resume after repeated failures
     - Visual polish within the design: consistent state colors across marker, sheet, and Demo status card; transition animations; readable log; accessibility labels on markers, controls, and status rows

@@ -71,6 +71,7 @@ struct DriveTabView: View {
         .buttonStyle(.borderedProminent)
         .tint(session.isActive ? .red : .blue)
         .disabled(!session.isMotionAvailable)
+        .accessibilityLabel(session.isActive ? "Stop sensing" : "Start sensing")
         .accessibilityHint(session.isActive
                            ? "Stops motion and location sensing"
                            : "Starts detecting road impacts with motion and location")

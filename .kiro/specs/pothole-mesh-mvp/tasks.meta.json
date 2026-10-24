@@ -170,6 +170,25 @@
         "chatSessionId": "sess_47a9cd04-2833-41e0-96f5-990e1c2767b7",
         "timestamp": 1792869792335
       }
+    ],
+    "8.1 Harden error and permission paths, polish UI, and document running the demo": [
+      {
+        "executionId": "074e3473-cf2f-4eff-b5e8-1947a5d8acba",
+        "chatSessionId": "sess_b4b3a5c7-c56a-4de2-9bd5-d41e11159ea7",
+        "timestamp": 1792870104005
+      },
+      {
+        "executionId": "074e3473-cf2f-4eff-b5e8-1947a5d8acba",
+        "chatSessionId": "sess_b4b3a5c7-c56a-4de2-9bd5-d41e11159ea7",
+        "timestamp": 1792870441507
+      }
+    ],
+    "8. Integration hardening, polish, and run instructions": [
+      {
+        "executionId": "074e3473-cf2f-4eff-b5e8-1947a5d8acba",
+        "chatSessionId": "sess_b4b3a5c7-c56a-4de2-9bd5-d41e11159ea7",
+        "timestamp": 1792870441540
+      }
     ]
   }
 }

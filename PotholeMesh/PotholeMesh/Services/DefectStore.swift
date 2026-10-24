@@ -91,6 +91,9 @@ final class DefectStore {
             lastRefresh = now()
             connectionStatus = .connected
         } catch {
+            // Leaving the active scene phase cancels the in-flight poll. That isn't a
+            // server failure, so don't flash the "unreachable" pill on return.
+            if Task.isCancelled { return }
             if error == .decoding {
                 Self.logger.error("GET /defects returned an undecodable body; keeping previous data")
             }
