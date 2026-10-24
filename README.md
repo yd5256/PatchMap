@@ -1,6 +1,6 @@
-# Pothole Mesh
+# PatchMap
 
-Pothole Mesh turns iPhones into a distributed road-condition sensor network. The iPhone app (tabs: Map, Drive, Demo) reports compact IMPACT and CLEAN_CROSSING evidence to a local FastAPI + SQLite backend, which clusters it into road defects and moves each one through SUSPECTED → CONFIRMED → LIKELY_REPAIRED → RESOLVED. The Demo tab's traffic simulator posts through the same `POST /evidence` endpoint real phones use.
+PatchMap turns iPhones into a distributed road-condition sensor network. The iPhone app (tabs: Map, Drive, Demo) reports compact IMPACT and CLEAN_CROSSING evidence to a local FastAPI + SQLite backend, which clusters it into road defects and moves each one through SUSPECTED → CONFIRMED → LIKELY_REPAIRED → RESOLVED. The Demo tab's traffic simulator posts through the same `POST /evidence` endpoint real phones use.
 
 - `server/`: Python 3.11+ backend (FastAPI, uvicorn, stdlib `sqlite3`)
 - `PotholeMesh/`: SwiftUI iPhone app (Xcode project, Apple frameworks only)
@@ -39,7 +39,7 @@ Tests use a fresh temporary SQLite file each and need no running server or netwo
 1. Open `PotholeMesh/PotholeMesh.xcodeproj` in Xcode, select your iPhone, set your signing team, and run.
 2. Find the Mac's LAN IP. Use `ipconfig getifaddr en0` (Wi-Fi; try `en1` if that's empty), or open System Settings → Wi-Fi → Details. The iPhone and the Mac must be on the same Wi-Fi network.
 3. In the app, open the **Demo** tab. Enter `http://<Mac LAN IP>:8000` (for example `http://192.168.1.20:8000`) in the Server field, then tap **Save**. The health row should show "Server healthy".
-4. On the first request to the Mac, iOS asks to let Pothole Mesh find and connect to devices on your local network. Tap **Allow**. If you tapped Don't Allow, turn it back on in Settings → Privacy & Security → Local Network → Pothole Mesh.
+4. On the first request to the Mac, iOS asks to let PatchMap find and connect to devices on your local network. Tap **Allow**. If you tapped Don't Allow, turn it back on in Settings → Privacy & Security → Local Network → PatchMap.
 
 In the iOS Simulator on the same Mac, the default `http://localhost:8000` works without changes.
 
