@@ -64,11 +64,11 @@ Common verification commands:
     - Replace the Demo placeholder in `ContentView`; verify with `xcodebuild … build`
     - _Requirements: 12.1–12.12, 13.1–13.11, 19.4, 22.1–22.5_
 
-- [ ] 5. Checkpoint - Demo vertical slice complete
+- [x] 5. Checkpoint - Demo vertical slice complete
   - Ensure the backend tests pass and the iOS build succeeds, ask the user if questions arise. The user runs the scripted demo (Reset → Inject → Start Low @ 1x → Medium @ 1x → Repair at Medium @ 2x) on the iPhone against the Mac backend manually.
 
-- [ ] 6. Real sensing services, evidence uploader, and Drive tab UI
-  - [ ] 6.1 Implement sensor services, `EvidenceUploader`, `DriveSession`, and `DriveTabView`
+- [x] 6. Real sensing services, evidence uploader, and Drive tab UI
+  - [x] 6.1 Implement sensor services, `EvidenceUploader`, `DriveSession`, and `DriveTabView`
     - `Config/DetectionConfig.swift`: single struct with every sensing constant from the design (sampling, window, thresholds, cooldown, capture, score bounds and weights, crossing radii, encounter timeout)
     - `Drive/MotionService.swift`: one `CMMotionManager`, device motion at 50 Hz on `OperationQueue.main`, delivers `MotionSample(t, accelMagnitudeG, rotationRateRadS)`; exposes availability; in-memory only
     - `Drive/LocationService.swift`: When-In-Use only, best-for-navigation accuracy, `.automotiveNavigation`, no background updates; updates only during a session; drops fixes with accuracy < 0 or > 20 m or older than 5 s; speed < 0 → unknown; keeps only the latest `LocationFix`; publishes authorization status

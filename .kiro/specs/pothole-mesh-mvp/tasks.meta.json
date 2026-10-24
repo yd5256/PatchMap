@@ -103,6 +103,37 @@
         "chatSessionId": "sess_f6319f85-4231-4c49-adb3-a7cf7da77bf7",
         "timestamp": 1792865500980
       }
+    ],
+    "5. Checkpoint - Demo vertical slice complete": [
+      {
+        "executionId": "f16ba1ad-e2b5-4e94-9bf4-e460060d94c6",
+        "chatSessionId": "sess_c5c60793-40c5-436d-934d-88bc65a29221",
+        "timestamp": 1792866390752
+      },
+      {
+        "executionId": "f16ba1ad-e2b5-4e94-9bf4-e460060d94c6",
+        "chatSessionId": "sess_c5c60793-40c5-436d-934d-88bc65a29221",
+        "timestamp": 1792866439726
+      }
+    ],
+    "6.1 Implement sensor services, `EvidenceUploader`, `DriveSession`, and `DriveTabView`": [
+      {
+        "executionId": "6cba9e74-9fab-4cbc-b716-e2717a3e12be",
+        "chatSessionId": "sess_2fa09605-c5d6-4998-9bb7-5ade4506daa7",
+        "timestamp": 1792867534978
+      },
+      {
+        "executionId": "6cba9e74-9fab-4cbc-b716-e2717a3e12be",
+        "chatSessionId": "sess_2fa09605-c5d6-4998-9bb7-5ade4506daa7",
+        "timestamp": 1792868012512
+      }
+    ],
+    "6. Real sensing services, evidence uploader, and Drive tab UI": [
+      {
+        "executionId": "6cba9e74-9fab-4cbc-b716-e2717a3e12be",
+        "chatSessionId": "sess_2fa09605-c5d6-4998-9bb7-5ade4506daa7",
+        "timestamp": 1792868012543
+      }
     ]
   }
 }

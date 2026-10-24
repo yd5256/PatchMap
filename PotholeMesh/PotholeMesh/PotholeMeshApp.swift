@@ -13,15 +13,22 @@ struct PotholeMeshApp: App {
 
     @State private var defectStore: DefectStore
     @State private var demoSimulator: DemoSimulator
+    @State private var evidenceUploader: EvidenceUploader
+    @State private var driveSession: DriveSession
     private let apiClient: URLSessionAPIClient
     private let deviceId: String
 
     init() {
         let api = URLSessionAPIClient()
         apiClient = api
-        deviceId = DeviceIdentity.deviceId()
-        _defectStore = State(initialValue: DefectStore(api: api))
+        let deviceId = DeviceIdentity.deviceId()
+        self.deviceId = deviceId
+        let store = DefectStore(api: api)
+        let uploader = EvidenceUploader(api: api)
+        _defectStore = State(initialValue: store)
         _demoSimulator = State(initialValue: DemoSimulator(api: api))
+        _evidenceUploader = State(initialValue: uploader)
+        _driveSession = State(initialValue: DriveSession(uploader: uploader, defectStore: store, deviceId: deviceId))
     }
 
     var body: some Scene {
@@ -29,6 +36,8 @@ struct PotholeMeshApp: App {
             ContentView()
                 .environment(defectStore)
                 .environment(demoSimulator)
+                .environment(evidenceUploader)
+                .environment(driveSession)
                 .environment(\.apiClient, apiClient)
                 .environment(\.deviceId, deviceId)
         }
@@ -37,6 +46,10 @@ struct PotholeMeshApp: App {
                 defectStore.startPolling()
             } else {
                 defectStore.stopPolling()
+            }
+            // No background sensing: end the session when the app leaves the foreground.
+            if phase == .background {
+                driveSession.stop()
             }
         }
     }

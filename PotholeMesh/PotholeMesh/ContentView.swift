@@ -15,8 +15,7 @@ struct ContentView: View {
                 MapTabView()
             }
             Tab("Drive", systemImage: "car") {
-                PlaceholderTabView(title: "Drive", systemImage: "car",
-                                   message: "On-device sensing arrives in a later build.")
+                DriveTabView()
             }
             Tab("Demo", systemImage: "play.circle") {
                 DemoTabView()
@@ -25,23 +24,14 @@ struct ContentView: View {
     }
 }
 
-private struct PlaceholderTabView: View {
-    let title: String
-    let systemImage: String
-    let message: String
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(title, systemImage: systemImage, description: Text(message))
-                .navigationTitle(title)
-        }
-    }
-}
-
 #Preview {
     let api = URLSessionAPIClient()
+    let store = DefectStore(api: api)
+    let uploader = EvidenceUploader(api: api)
     ContentView()
-        .environment(DefectStore(api: api))
+        .environment(store)
         .environment(DemoSimulator(api: api))
+        .environment(uploader)
+        .environment(DriveSession(uploader: uploader, defectStore: store, deviceId: "preview"))
         .environment(\.apiClient, api)
 }
