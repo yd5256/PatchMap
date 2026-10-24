@@ -28,6 +28,7 @@ The backend has no authentication. Anyone on the same network can post evidence 
 
 ```sh
 cd server
+source .venv/bin/activate
 python -m pytest
 ```
 

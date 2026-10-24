@@ -102,7 +102,7 @@ Common verification commands:
     - Run backend tests, the iOS build, and the iOS unit tests; fix any failures
     - _Requirements: 10.9, 11.10, 13.7, 13.8, 14.4, 14.6, 19.1–19.7, 21.5, 21.6, 22.6, 22.7_
 
-- [ ] 9. Final checkpoint - Ensure all tests pass
+- [x] 9. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
